@@ -1,0 +1,10 @@
+.form {
+    @apply flex gap-3 m-5;
+}
+
+.input {
+    @apply bg-green-800 rounded w-full h-12 p-3 text-white;
+}
+.button{
+    @apply border-2 border-amber-700 w-20 rounded;
+}

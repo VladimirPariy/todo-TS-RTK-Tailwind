@@ -1,0 +1,9 @@
+.container{
+@apply flex w-full border
+}
+.title{
+@apply mx-4 p-2 flex-auto
+}
+.btnForDel{
+@apply border p-2
+}
