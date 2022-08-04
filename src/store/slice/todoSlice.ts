@@ -1,14 +1,15 @@
 import {createSlice, nanoid, PayloadAction} from "@reduxjs/toolkit";
-import {IState, stateTodo } from "../../types/stateTypes";
 import {ITodo} from "../../types/todoTypes";
+import {RootState} from "../../hooks/useAppSelector";
 
+const initialState: ITodo[] = []
 
 const todoSlice = createSlice({
     name: '@@todo',
-    initialState: [],
+    initialState,
     reducers: {
         addTodo: {
-            reducer: (state: stateTodo, action: PayloadAction<ITodo>) => {
+            reducer: (state, action: PayloadAction<ITodo>) => {
                 state.push(action.payload)
             },
             prepare: (title: string) => ({
@@ -19,12 +20,24 @@ const todoSlice = createSlice({
                 }
             })
         },
-
+        toggleTodo(state, action: PayloadAction<string>) {
+            const todo = state.find((todo) => todo.id === action.payload)
+            if (todo) {
+                todo.completed = !todo.completed
+            }
+        },
+        deleteTodo(state, action: PayloadAction<string>) {
+            return state.filter((todo) => action.payload !== todo.id)
+        }
 
     },
     extraReducers: {}
 })
 
-export const {addTodo} = todoSlice.actions
+export const {addTodo, toggleTodo, deleteTodo} = todoSlice.actions
 export const todoReducer = todoSlice.reducer
-export const selectTodo = (state: IState) => state.todo
+
+
+export const selectTodoAll = (state: RootState) => state.todo
+export const selectTodoActive = (state: RootState) => state.todo.filter(todo => !todo.completed)
+export const selectTodoCompleted = (state: RootState) => state.todo.filter(todo => todo.completed)

@@ -1,18 +1,25 @@
 import {FC} from 'react';
 import cl from './TodoList.module.scss'
-import {useSelector} from 'react-redux'
-import { ITodo } from '../../types/todoTypes';
-import {selectTodo} from "../../store/slice/todoSlice";
+import {ITodo} from '../../types/todoTypes';
 import TodoItem from "../TodoItem/TodoItem";
+import {useAppSelector} from "../../hooks/useAppSelector";
+import {selectFilter} from "../../store/slice/filtersSlice";
+import {useSelectTodo} from "../../hooks/useSelectTodo";
 
 
 const TodoList: FC = () => {
-    const todos = useSelector(selectTodo)
+    const filter = useAppSelector(selectFilter)
+    const todos = useSelectTodo(filter)
+
     return (
-        <div className={cl.wrapper}>
+        <div className={cl.containerList}>
             {todos.map((todo: ITodo) => (
-                <TodoItem key={todo.id} title={todo.title}/>
+                <TodoItem key={todo.id} title={todo.title} completed={todo.completed} id={todo.id}/>
             ))}
+            <div className={cl.extraMenu}>
+                <div className={cl.activeItem}>{todos.length} item left</div>
+                <button className={cl.clearCompleted}>Clear completed</button>
+            </div>
         </div>
     );
 };

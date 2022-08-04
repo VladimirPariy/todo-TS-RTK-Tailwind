@@ -22,13 +22,14 @@ const AddFormTodo: FC = () => {
     return (
         <>
             <form className={cl.form} onSubmit={submitHandle}>
+                <button className={cl.button}>
+                    Add
+                </button>
                 <input type="text"
                        className={cl.input}
                        value={todoValue}
                        onChange={onInputChangeHandler}/>
-                <button className={cl.button}>
-                    Add
-                </button>
+
             </form>
         </>
     )

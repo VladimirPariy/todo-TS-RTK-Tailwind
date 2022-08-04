@@ -1,3 +1,13 @@
-.wrapper{
-    @apply max-w-lg m-auto
+.containerList {
+  .extraMenu {
+    @apply flex justify-between;
+    .activeItem {
+
+    }
+
+    .clearCompleted {
+
+    }
+  }
+
 }
