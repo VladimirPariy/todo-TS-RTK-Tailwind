@@ -1,26 +1,21 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC} from 'react';
 import cl from './Header.module.scss'
-import mobImg from '../../Assets/Image/bg-mobile-dark.jpg'
-import desImg from '../../Assets/Image/bg-desktop-dark.jpg'
+import mobDarkImg from '../../Assets/Image/bg-mobile-dark.jpg'
+import desDarkImg from '../../Assets/Image/bg-desktop-dark.jpg'
+import mobLightImg from '../../Assets/Image/bg-mobile-light.jpg'
+import desLightImg from '../../Assets/Image/bg-desktop-light.jpg'
+import {useScreenWidth} from "../../hooks/useScreenWidth";
+import {useAppSelector} from "../../hooks/useAppSelector";
+import {themeSelector} from "../../store/slice/themeSlice";
 
 const Header: FC = () => {
 
-    const [userWidth, setUserWidth] = useState<number>(window.innerWidth)
+    const theme = useAppSelector(themeSelector)
+    const userWidth = useScreenWidth()
 
-
-    const updateWidthScreen = () => {
-        setUserWidth(window.innerWidth)
-    }
-
-
-    useEffect(() => {
-        window.addEventListener("resize", updateWidthScreen);
-        return () => {
-            window.removeEventListener("resize", updateWidthScreen)
-        }
-    }, [])
-
-    let headerImg:string = userWidth > 500 ? desImg : mobImg
+    const headerDarkImg: string = userWidth > 500 ? desDarkImg : mobDarkImg
+    const headerLightImg: string = userWidth > 500 ? desLightImg : mobLightImg
+    const headerImg = theme === 'light' ? headerLightImg : headerDarkImg
 
     return (
         <div className={cl.header}>
