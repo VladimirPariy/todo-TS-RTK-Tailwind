@@ -1,5 +1,6 @@
 import {ChangeEvent, FC, FormEvent, useState} from "react";
 import cl from './AddFormTodo.module.scss'
+import { AiOutlinePlus } from 'react-icons/ai';
 import {useDispatch} from "react-redux";
 import {addTodo} from "../../store/slice/todoSlice";
 
@@ -20,18 +21,15 @@ const AddFormTodo: FC = () => {
     }
 
     return (
-        <>
-            <form className={cl.form} onSubmit={submitHandle}>
-                <button className={cl.button}>
-                    Add
-                </button>
-                <input type="text"
-                       className={cl.input}
-                       value={todoValue}
-                       onChange={onInputChangeHandler}/>
-
-            </form>
-        </>
+        <form className={[cl.form, cl.dark].join(' ')} onSubmit={submitHandle}>
+            <input type="text"
+                   className={cl.input}
+                   value={todoValue}
+                   onChange={onInputChangeHandler}/>
+            <button className={cl.button}>
+                <AiOutlinePlus/>
+            </button>
+        </form>
     )
 }
 export default AddFormTodo

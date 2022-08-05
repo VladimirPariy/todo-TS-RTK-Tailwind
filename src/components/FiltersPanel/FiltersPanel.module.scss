@@ -1,9 +1,3 @@
 .filterContainer{
   @apply text-center;
-  > button {
-    @apply mx-3
-  }
-  .active{
-    @apply text-amber-500;
-  }
 }

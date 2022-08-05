@@ -5,6 +5,7 @@ import TodoItem from "../TodoItem/TodoItem";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {selectFilter} from "../../store/slice/filtersSlice";
 import {useSelectTodo} from "../../hooks/useSelectTodo";
+import ExtraMenu from "../ExtraMenu/ExtraMenu";
 
 
 const TodoList: FC = () => {
@@ -16,10 +17,7 @@ const TodoList: FC = () => {
             {todos.map((todo: ITodo) => (
                 <TodoItem key={todo.id} title={todo.title} completed={todo.completed} id={todo.id}/>
             ))}
-            <div className={cl.extraMenu}>
-                <div className={cl.activeItem}>{todos.length} item left</div>
-                <button className={cl.clearCompleted}>Clear completed</button>
-            </div>
+            <ExtraMenu/>
         </div>
     );
 };

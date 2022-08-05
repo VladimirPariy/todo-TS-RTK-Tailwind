@@ -4,9 +4,9 @@ import {ITodo} from "../types/todoTypes";
 
 export const useSelectTodo = (filter: string): ITodo[] | [] => {
     let selector
-    if (filter === 'all') {
+    if (filter === 'All') {
         selector = selectTodoAll
-    } else if (filter === 'active') {
+    } else if (filter === 'Active') {
         selector = selectTodoActive
     } else {
         selector = selectTodoCompleted

@@ -4,7 +4,7 @@ import {RootState} from "../../hooks/useAppSelector";
 
 const filterSlice = createSlice({
     name: '@@filters',
-    initialState: 'all',
+    initialState: 'All',
     reducers: {
         setFilter: (state, action: PayloadAction<string>) => {
             return action.payload
