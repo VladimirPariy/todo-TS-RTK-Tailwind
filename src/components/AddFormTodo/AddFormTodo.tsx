@@ -1,14 +1,17 @@
 import {ChangeEvent, FC, FormEvent, useState} from "react";
 import cl from './AddFormTodo.module.scss'
-import { AiOutlinePlus } from 'react-icons/ai';
-import {useDispatch} from "react-redux";
+import {AiOutlinePlus} from 'react-icons/ai';
 import {addTodo} from "../../store/slice/todoSlice";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {useTheme} from "../../hooks/useTheme";
 
 
 const AddFormTodo: FC = () => {
 
+    const dispatch = useAppDispatch()
+    const setFormClassName = useTheme('form', cl)
+
     const [todoValue, setTodoValue] = useState<string>('')
-    const dispatch = useDispatch()
 
     const submitHandle = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -21,11 +24,13 @@ const AddFormTodo: FC = () => {
     }
 
     return (
-        <form className={[cl.form, cl.dark].join(' ')} onSubmit={submitHandle}>
+        <form className={setFormClassName} onSubmit={submitHandle}>
             <input type="text"
                    className={cl.input}
                    value={todoValue}
-                   onChange={onInputChangeHandler}/>
+                   onChange={onInputChangeHandler}
+                   placeholder='Create a new todo...'
+            />
             <button className={cl.button}>
                 <AiOutlinePlus/>
             </button>

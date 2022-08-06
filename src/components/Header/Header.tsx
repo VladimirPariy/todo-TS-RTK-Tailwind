@@ -13,13 +13,13 @@ const Header: FC = () => {
     const theme = useAppSelector(themeSelector)
     const userWidth = useScreenWidth()
 
-    const headerDarkImg: string = userWidth > 500 ? desDarkImg : mobDarkImg
-    const headerLightImg: string = userWidth > 500 ? desLightImg : mobLightImg
+    const headerDarkImg: string = userWidth > 450 ? desDarkImg : mobDarkImg
+    const headerLightImg: string = userWidth > 450 ? desLightImg : mobLightImg
     const headerImg = theme === 'light' ? headerLightImg : headerDarkImg
 
     return (
         <div className={cl.header}>
-            <img src={headerImg} alt="" className={cl.img}/>
+            <img src={headerImg} alt="img" className={cl.img}/>
         </div>
     );
 };

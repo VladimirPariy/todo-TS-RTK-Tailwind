@@ -1,3 +1,31 @@
-.wrapper{
-    @apply max-w-sm m-auto;
+@import './index';
+
+.app {
+  @apply h-screen;
+  .containerForStyle {
+    @apply w-full;
+    .wrapper {
+      @apply max-w-sm m-auto;
+    }
+  }
+
+}
+
+.app.light {
+  background: $Light-Very-Light-Grayish-Blue;
+}
+
+.containerForStyle.light {
+  background: $Light-Very-Light-Grayish-Blue no-repeat center top fixed;
+  background-size: cover;
+}
+
+.app.dark {
+  background: $Dark-Very-Dark-Blue no-repeat center top fixed;
+  background-size: cover;
+}
+
+.containerForStyle.dark {
+  background: $Dark-Very-Dark-Blue no-repeat center top fixed;
+  background-size: cover;
 }
