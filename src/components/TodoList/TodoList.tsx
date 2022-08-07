@@ -14,12 +14,18 @@ const TodoList: FC = () => {
     const todos = useSelectTodo(filter)
     const getContainerListClassName = useTheme('containerList', cl)
     return (
-        <div className={getContainerListClassName}>
-            {todos.map((todo: ITodo) => (
-                <TodoItem key={todo.id} title={todo.title} completed={todo.completed} id={todo.id}/>
-            ))}
-            <ExtraMenu/>
-        </div>
+        <>
+            <div className={getContainerListClassName}>
+                {todos.map((todo: ITodo) => (
+                    <TodoItem key={todo.id} title={todo.title} completed={todo.completed} id={todo.id}/>
+                ))}
+                <ExtraMenu/>
+            </div>
+            {todos.length > 0 &&
+                <div className={cl.text}>Drag and drop to reorder list</div>
+            }
+
+        </>
     );
 };
 

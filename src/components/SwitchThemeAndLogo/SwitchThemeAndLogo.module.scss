@@ -2,12 +2,12 @@
 .wrapper {
   @apply flex justify-between text-white mb-5;
   .logo {
-    @apply text-3xl font-bold ;
+    @apply text-3xl font-bold cursor-default;
     letter-spacing: 0.75rem;
   }
 
   .switchTheme {
-    //@apply h-4;
+    @apply cursor-pointer;
     height: 1.35rem;
   }
 }

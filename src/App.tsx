@@ -20,6 +20,7 @@ const App: FC = () => {
                     <FiltersPanel/>
                     <TodoList/>
                 </div>
+
             </div>
         </div>
     );

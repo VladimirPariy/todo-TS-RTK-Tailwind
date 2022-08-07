@@ -1,7 +1,7 @@
 @import '../../index';
 
 .filterContainer{
-  @apply text-center relative z-10 py-2 rounded my-2;
+  @apply text-center relative z-10 py-4 rounded my-3;
   font-size: 14px;
 }
 .filterContainer.light{

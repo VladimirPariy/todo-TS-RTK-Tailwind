@@ -2,10 +2,23 @@
 
 .containerTodo {
   @apply flex w-full border-b py-1;
+.checkbox{
+  @apply hidden;
+}
   .checkboxInput {
-    @apply my-auto mx-3;
+    @apply w-5 h-5 rounded-xl my-auto mr-1.5 ml-5 cursor-pointer outline-none;
+    border: 1px solid $Light-Dark-Grayish-Blue;
   }
-
+  .checkboxInput.checkboxActive{
+    background: $Check-Background;
+    position: relative;
+  }
+  .checkboxInput.checkboxActive::before{
+    @apply text-white absolute;
+    content: url("../../Assets/Image/icon-check.svg");
+    right: 3px;
+    top: -4px;
+  }
   .title {
     @apply p-2 flex-auto;
   }

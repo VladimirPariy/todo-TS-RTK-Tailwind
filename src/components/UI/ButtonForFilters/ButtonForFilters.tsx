@@ -6,10 +6,10 @@ import {useTheme} from "../../../hooks/useTheme";
 interface ButtonForFiltersProps {
     onClickHandler: (str: filtersType) => void;
     attr: filtersType;
-    filter:string
+    filter: string
 }
 
-const ButtonForFilters:FC<ButtonForFiltersProps> = ({ onClickHandler, filter,  attr}) => {
+const ButtonForFilters: FC<ButtonForFiltersProps> = ({onClickHandler, filter, attr}) => {
 
     const getClass = (attribute: filtersType): string => {
         return filter === attribute ? 'active' : 'notActive'
@@ -19,7 +19,7 @@ const ButtonForFilters:FC<ButtonForFiltersProps> = ({ onClickHandler, filter,  a
 
     return (
         <button onClick={() => onClickHandler(attr)}
-                className={btnClasses }>
+                className={btnClasses}>
             {attr}
         </button>
     );

@@ -3,6 +3,13 @@
 @import '../../index';
 .containerList {
   @apply relative z-10 rounded;
+
+}
+.text{
+  font-size: 14px;
+  text-align: center;
+  margin: 20px 0 0 0;
+  color:$Dark-Dark-Grayish-Blue;
 }
 .containerList.light{
   background: $Light-Very-Light-Gray;

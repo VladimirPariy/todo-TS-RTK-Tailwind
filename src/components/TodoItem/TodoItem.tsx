@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useState} from 'react'
 import cl from './TodoItem.module.scss'
 import {deleteTodo, toggleTodo} from "../../store/slice/todoSlice";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
@@ -9,7 +9,7 @@ import {useTheme} from "../../hooks/useTheme";
 
 const TodoItem: FC<ITodo> = ({title, id, completed}) => {
     const dispatch = useAppDispatch()
-
+    // const [isChecked, setIsChecked] = useState<boolean>(false)
     const toggleCheckboxHandler = () => {
         dispatch(toggleTodo(id))
     }
@@ -18,13 +18,18 @@ const TodoItem: FC<ITodo> = ({title, id, completed}) => {
         dispatch(deleteTodo(id))
     }
     const getContainerTodoClassName = useTheme('containerTodo', cl)
-
+//className={[cl['checkboxInput'], cl[completed ? "checkboxActive" : ""]].join(' ')}
     return (
         <div className={getContainerTodoClassName}>
-            <input type="checkbox" className={cl.checkboxInput} name='checkboxInput'
-                   onChange={toggleCheckboxHandler} checked={completed}/>
-            <label htmlFor="checkboxInput"></label>
 
+            <input className={cl.checkbox}
+                type="checkbox"
+                id={id}
+                checked={completed}
+                onChange={toggleCheckboxHandler}/>
+            <label htmlFor={id}
+                className={[cl['checkboxInput'], cl[completed ? "checkboxActive" : ""]].join(' ')}
+            />
             <div className={cl.title}>
                 {title}
             </div>
