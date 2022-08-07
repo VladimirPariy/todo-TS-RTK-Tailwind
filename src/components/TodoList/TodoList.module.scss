@@ -1,3 +1,14 @@
-.containerList {
 
+
+@import '../../index';
+.containerList {
+  @apply relative z-10 rounded;
+}
+.containerList.light{
+  background: $Light-Very-Light-Gray;
+}
+
+.containerList.dark{
+  background: $Dark-Very-Dark-Desaturated-Blue;
+  color:$Dark-Light-Grayish-Blue;
 }

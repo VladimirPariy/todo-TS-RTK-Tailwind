@@ -1,6 +1,19 @@
+@import '../../../index';
+
 .button {
-    @apply mx-3
+    @apply mx-3 font-bold;
+    color:$Dark-Dark-Grayish-Blue;
+
+}
+.button:hover{
+    color:$Dark-Very-Dark-Grayish;
 }
 .active{
-    @apply text-amber-500;
+    color: $Bright-Blue;
+}
+
+.active:focus{
+    color: $Bright-Blue;
+    border:none;
+    outline-color: transparent;
 }

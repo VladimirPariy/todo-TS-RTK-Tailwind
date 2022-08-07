@@ -17,8 +17,8 @@ const App: FC = () => {
                 <div className={cl.wrapper}>
                     <SwitchThemeAndLogo/>
                     <AddFormTodo/>
-                    <TodoList/>
                     <FiltersPanel/>
+                    <TodoList/>
                 </div>
             </div>
         </div>

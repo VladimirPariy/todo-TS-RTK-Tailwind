@@ -1,3 +1,14 @@
+@import '../../index';
+
 .filterContainer{
-  @apply text-center;
+  @apply text-center relative z-10 py-2 rounded my-2;
+  font-size: 14px;
+}
+.filterContainer.light{
+  background: $Light-Very-Light-Gray;
+}
+
+.filterContainer.dark{
+  background: $Dark-Very-Dark-Desaturated-Blue;
+  color:$Dark-Light-Grayish-Blue;
 }

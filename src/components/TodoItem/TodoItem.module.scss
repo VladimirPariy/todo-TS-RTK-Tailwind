@@ -1,9 +1,20 @@
-.containerTodo{
-@apply flex w-full border
+@import '../../index';
+
+.containerTodo {
+  @apply flex w-full border-b py-1;
+  .checkboxInput {
+    @apply my-auto mx-3;
+  }
+
+  .title {
+    @apply p-2 flex-auto;
+  }
+
+  .btnForDel {
+    @apply px-4 w-11;
+  }
 }
-.title{
-@apply mx-4 p-2 flex-auto
-}
-.btnForDel{
-@apply border p-2
+
+.containerTodo.dark{
+  border-color: $Dark-Very-Dark-Grayish;
 }
