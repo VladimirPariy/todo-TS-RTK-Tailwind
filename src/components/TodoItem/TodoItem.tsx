@@ -28,7 +28,7 @@ const TodoItem: FC<ITodo> = ({title, id, completed}) => {
                 checked={completed}
                 onChange={toggleCheckboxHandler}/>
             <label htmlFor={id}
-                className={[cl['checkboxInput'], cl[completed ? "checkboxActive" : ""]].join(' ')}
+                className={[cl['checkboxLabel'], cl[completed ? "checkboxActive" : ""]].join(' ')}
             />
             <div className={cl.title}>
                 {title}
