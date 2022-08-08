@@ -19,3 +19,16 @@
   background: $Dark-Very-Dark-Desaturated-Blue;
   color:$Dark-Light-Grayish-Blue;
 }
+
+.emptyList {
+  @apply flex flex-col items-center justify-center w-full text-gray-300 mt-4 p-3;
+  >svg{
+    @apply text-gray-500 text-4xl;
+  }
+  .title{
+    @apply my-3 font-bold  text-sm;
+  }
+  .body{
+    @apply text-sm
+  }
+}

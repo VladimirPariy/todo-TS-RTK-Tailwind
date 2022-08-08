@@ -34,7 +34,7 @@ const TodoItem: FC<ITodo> = ({title, id, completed}) => {
                 {title}
             </div>
             <button className={cl.btnForDel} onClick={removeHandler}>
-                <img src={removeSvg} alt=""/>
+                <img src={removeSvg} alt="" className={cl.img}/>
             </button>
         </div>
     );

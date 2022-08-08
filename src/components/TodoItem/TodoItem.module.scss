@@ -2,32 +2,37 @@
 
 .containerTodo {
   @apply flex w-full border-b py-1;
-.checkbox{
-  @apply hidden;
-}
+  .checkbox {
+    @apply hidden;
+  }
+
   .checkboxLabel {
-    @apply w-5 h-5 rounded-xl mt-2.5 mr-1.5 ml-5 cursor-pointer outline-none;
+    @apply w-5 h-5 rounded-xl my-auto mr-1.5 ml-3 cursor-pointer outline-none flex-grow-0 flex-shrink-0 flex justify-center items-center;
     border: 1px solid $Light-Dark-Grayish-Blue;
   }
-  .checkboxLabel.checkboxActive{
+
+  .checkboxLabel.checkboxActive {
     background: $Check-Background;
     position: relative;
   }
-  .checkboxLabel.checkboxActive::before{
+
+  .checkboxLabel.checkboxActive::before {
     @apply text-white absolute;
     content: url("../../Assets/Image/icon-check.svg");
     right: 3px;
     top: -4px;
   }
+
   .title {
-    @apply p-2 flex-auto;
+    @apply p-2 flex-auto break-all;
   }
 
   .btnForDel {
-    @apply px-4 w-11;
+    @apply px-4 flex-grow-0 flex-shrink-0;
+
   }
 }
 
-.containerTodo.dark{
+.containerTodo.dark {
   border-color: $Dark-Very-Dark-Grayish;
 }

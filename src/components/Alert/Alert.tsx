@@ -1,0 +1,1 @@
+import React, {FC, ReactNode} from 'react';import cl from './Alert.module.scss'interface AlertProps {    children:ReactNode}const Alert:FC<AlertProps> = ({children}) => {    return (        <div>            <div className={cl.alert}                 role="alert">                {children}            </div>        </div>    );};export default Alert;

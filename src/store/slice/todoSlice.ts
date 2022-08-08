@@ -17,7 +17,8 @@ const todoSlice = createSlice({
                 payload: {
                     title,
                     id: nanoid(),
-                    completed: false
+                    completed: false,
+                    isUpdating: false
                 }
             })
         },
