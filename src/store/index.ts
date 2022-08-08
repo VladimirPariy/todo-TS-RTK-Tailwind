@@ -1,14 +1,16 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {todoReducer} from "./slice/todoSlice";
-import {filterReducer} from "./slice/filtersSlice";
-import {themeReducer} from "./slice/themeSlice";
-import {isValidReducer} from "./slice/validTodoSlice";
+import {FLUSH, PAUSE, PERSIST, persistStore, PURGE, REGISTER, REHYDRATE,} from 'redux-persist'
+import {persistedReducer} from "./reduxPersistor";
+
 
 export const store = configureStore({
-    reducer: {
-        todo: todoReducer,
-        filter:filterReducer,
-        theme: themeReducer,
-        isValid:isValidReducer
-    }
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 })
+
+export let persistor = persistStore(store)

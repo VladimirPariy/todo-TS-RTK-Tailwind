@@ -1,34 +1,23 @@
-
-
 @import '../../index';
+
 .containerList {
   @apply relative z-10 rounded;
 
 }
-.text{
+
+.text {
   font-size: 14px;
   text-align: center;
   margin: 20px 0 0 0;
-  color:$Dark-Dark-Grayish-Blue;
+  color: $Dark-Dark-Grayish-Blue;
 }
-.containerList.light{
+
+.containerList.light {
   background: $Light-Very-Light-Gray;
 }
 
-.containerList.dark{
+.containerList.dark {
   background: $Dark-Very-Dark-Desaturated-Blue;
-  color:$Dark-Light-Grayish-Blue;
+  color: $Dark-Light-Grayish-Blue;
 }
 
-.emptyList {
-  @apply flex flex-col items-center justify-center w-full text-gray-300 mt-4 p-3;
-  >svg{
-    @apply text-gray-500 text-4xl;
-  }
-  .title{
-    @apply my-3 font-bold  text-sm;
-  }
-  .body{
-    @apply text-sm
-  }
-}
