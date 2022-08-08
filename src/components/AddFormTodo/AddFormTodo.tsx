@@ -14,8 +14,8 @@ const AddFormTodo: FC = () => {
   const dispatch = useAppDispatch()
   const isValid = useAppSelector(isValidTodoSelector)
   const setFormClassName = useTheme('form', cl)
-  const refInput = useRef<HTMLInputElement>(null)
 
+  const refInput = useRef<HTMLInputElement>(null)
   const [todoValue, setTodoValue] = useState<string>('')
 
   const submitHandle = (e: FormEvent<HTMLFormElement>) => {
@@ -38,6 +38,7 @@ const AddFormTodo: FC = () => {
   useEffect(() => {
       const timeout = setTimeout(() => {
         if (!isValid) dispatch(isValidTodo(true))
+
       }, 2000)
 
       return () => clearTimeout(timeout)
@@ -54,6 +55,9 @@ const AddFormTodo: FC = () => {
                onChange={inputChangeHandler}
                placeholder='Create a new todo...'
                ref={refInput}
+               onBlur={() => {
+                 if (!isValid) dispatch(isValidTodo(true))
+               }}
         />
         <button className={cl.button}>
           <AiOutlinePlus/>
