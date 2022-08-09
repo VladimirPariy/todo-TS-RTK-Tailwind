@@ -8,36 +8,36 @@ import {useTheme} from "../../hooks/useTheme";
 
 
 const TodoItem: FC<ITodo> = ({title, id, completed}) => {
-    const dispatch = useAppDispatch()
-    // const [isChecked, setIsChecked] = useState<boolean>(false)
-    const toggleCheckboxHandler = () => {
-        dispatch(toggleTodo(id))
-    }
+  const dispatch = useAppDispatch()
 
-    const removeHandler = () => {
-        dispatch(deleteTodo(id))
-    }
-    const getContainerTodoClassName = useTheme('containerTodo', cl)
-//className={[cl['checkboxInput'], cl[completed ? "checkboxActive" : ""]].join(' ')}
-    return (
-        <div className={getContainerTodoClassName}>
+  const toggleCheckboxHandler = () => {
+    dispatch(toggleTodo(id))
+  }
 
-            <input className={cl.checkbox}
-                type="checkbox"
-                id={id}
-                checked={completed}
-                onChange={toggleCheckboxHandler}/>
-            <label htmlFor={id}
-                className={[cl['checkboxLabel'], cl[completed ? "checkboxActive" : ""]].join(' ')}
-            />
-            <div className={cl.title}>
-                {title}
-            </div>
-            <button className={cl.btnForDel} onClick={removeHandler}>
-                <img src={removeSvg} alt="" className={cl.img}/>
-            </button>
-        </div>
-    );
+  const removeHandler = () => {
+    dispatch(deleteTodo(id))
+  }
+  const getContainerTodoClassName = useTheme('containerTodo', cl)
+
+  return (
+    <div className={`${getContainerTodoClassName} ${completed ? cl.completed : ''}`}>
+
+      <input className={cl.checkbox}
+             type="checkbox"
+             id={id}
+             checked={completed}
+             onChange={toggleCheckboxHandler}/>
+      <label htmlFor={id}
+             className={[cl['checkboxLabel'], cl[completed ? "checkboxActive" : ""]].join(' ')}
+      />
+      <div className={cl.title}>
+        {title}
+      </div>
+      <button className={cl.btnForDel} onClick={removeHandler}>
+        <img src={removeSvg} alt="" className={cl.img}/>
+      </button>
+    </div>
+  );
 };
 
 export default TodoItem;

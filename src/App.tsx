@@ -8,22 +8,23 @@ import SwitchThemeAndLogo from "./components/SwitchThemeAndLogo/SwitchThemeAndLo
 import {useTheme} from "./hooks/useTheme";
 
 const App: FC = () => {
-    const setAppClassName = useTheme('app', cl)
-    const setContainerClassName = useTheme('containerForStyle', cl)
-    return (
-        <div className={setAppClassName}>
-            <Header/>
-            <div className={setContainerClassName}>
-                <div className={cl.wrapper}>
-                    <SwitchThemeAndLogo/>
-                    <AddFormTodo/>
-                    <FiltersPanel/>
-                    <TodoList/>
-                </div>
-
-            </div>
+  const setAppClassName = useTheme('app', cl)
+  const setContainerClassName = useTheme('containerForStyle', cl)
+  return (
+    <div className={setAppClassName}>
+      <Header/>
+      <div className={setContainerClassName}>
+        <div className={cl.wrapper}>
+          <SwitchThemeAndLogo/>
+          <AddFormTodo/>
+          <FiltersPanel/>
+          <TodoList/>
+          <div className={cl.text}>Drag and drop to reorder list</div>
         </div>
-    );
+
+      </div>
+    </div>
+  );
 }
 
 export default App;

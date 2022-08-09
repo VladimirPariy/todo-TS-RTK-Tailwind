@@ -4,13 +4,13 @@
   @apply flex justify-between py-2 px-3;
   font-size: 14px;
   .activeItem {
-    color: $Dark-Dark-Grayish-Blue;
+    color: $Light-Dark-Grayish-Blue;
     font-weight: bold;
     cursor: default;
   }
 
   .clearCompleted {
-    color: $Dark-Dark-Grayish-Blue;
+    color: $Light-Dark-Grayish-Blue;
     font-weight: bold;
   }
   .clearCompleted:hover {

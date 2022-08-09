@@ -31,8 +31,17 @@
     @apply px-4 flex-grow-0 flex-shrink-0;
 
   }
-}
 
+}
+.completed{
+  @apply line-through;
+  color: $Light-Light-Grayish-Blue;
+}
+.completed.dark{
+  color: $Dark-Very-Dark-Grayish;
+}
 .containerTodo.dark {
   border-color: $Dark-Very-Dark-Grayish;
+
+  //Dark-Very-Dark-Grayish
 }

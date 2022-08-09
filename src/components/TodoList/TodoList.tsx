@@ -20,7 +20,7 @@ const TodoList: FC = () => {
         <TodoItem key={todo.id} title={todo.title} completed={todo.completed} id={todo.id}/>
       ))}
       <ExtraMenu/>
-      <div className={cl.text}>Drag and drop to reorder list</div>
+
     </div>
   );
 };
