@@ -23,12 +23,12 @@ const AddFormTodo: FC = () => {
     if (todoValue.trim().length > 0) {
       dispatch(addTodo(todoValue))
       setTodoValue('')
-      refInput?.current?.focus()
+      refInput.current?.focus()
       return
     }
     dispatch(isValidTodo(false))
     setTodoValue('')
-    refInput?.current?.focus()
+    refInput.current?.focus()
   }
 
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +59,7 @@ const AddFormTodo: FC = () => {
                  if (!isValid) dispatch(isValidTodo(true))
                }}
         />
-        <button className={cl.button}>
+        <button className={cl.button} type='submit'>
           <AiOutlinePlus/>
         </button>
       </form>
