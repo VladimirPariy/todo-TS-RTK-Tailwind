@@ -22,9 +22,14 @@
     right: 3px;
     top: -4px;
   }
-
-  .title {
-    @apply p-2 flex-auto break-all;
+.title{
+  @apply p-2 flex-auto;
+}
+  .titleLess400px {
+     @apply break-all;
+  }
+  .titleMore400px {
+    @apply break-words;
   }
 
   .btnForDel {

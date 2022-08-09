@@ -20,7 +20,6 @@ const TodoList: FC = () => {
         <TodoItem key={todo.id} title={todo.title} completed={todo.completed} id={todo.id}/>
       ))}
       <ExtraMenu/>
-
     </div>
   );
 };
