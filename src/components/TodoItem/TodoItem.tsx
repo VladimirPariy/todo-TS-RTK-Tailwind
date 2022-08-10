@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useRef} from 'react'
 import cl from './TodoItem.module.scss'
 import {deleteTodo, isUpdatingTodo, toggleTodo} from "../../store/slice/todoSlice";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
@@ -6,8 +6,8 @@ import {ITodo} from "../../types/todoTypes";
 import {useTheme} from "../../hooks/useTheme";
 import {useScreenWidth} from "../../hooks/useScreenWidth";
 import {BsPencil} from 'react-icons/bs';
-import UpdatingTitle from "../UpdatingForm/UpdatingTitle";
 import CrossSvg from "../../Assets/Image/CrossSVG";
+import UpdatingTitle from "../UpdatingForm/UpdatingTitle";
 
 
 const TodoItem: FC<ITodo> = ({title, id, completed, isUpdating}) => {
@@ -50,7 +50,7 @@ const TodoItem: FC<ITodo> = ({title, id, completed, isUpdating}) => {
       <button onClick={startUpdateHandler} className={cl.btnForUpdating}>
         <BsPencil/>
       </button>
-      <button className={cl.btnForDel} onClick={removeHandler} >
+      <button className={cl.btnForDel} onClick={removeHandler}>
         <CrossSvg/>
       </button>
     </div>
