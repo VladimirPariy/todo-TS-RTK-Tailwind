@@ -27,5 +27,9 @@ body {
   font-family: 'Josefin Sans', sans-serif;
 }
 
-
+svg path {
+  fill: inherit;
+  stroke: inherit;
+  stroke-width: inherit;
+}
 //@import '../../index';

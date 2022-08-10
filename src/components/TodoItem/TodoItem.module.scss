@@ -22,31 +22,56 @@
     right: 3px;
     top: -4px;
   }
-.title{
-  @apply p-2 flex-auto;
-}
-  .titleLess400px {
-     @apply break-all;
+
+  .title {
+    @apply p-2 flex-auto;
   }
+
+  .titleLess400px {
+    @apply break-all;
+  }
+
   .titleMore400px {
     @apply break-words;
   }
 
   .btnForDel {
-    @apply px-4 flex-grow-0 flex-shrink-0;
+    @apply pr-4 flex-grow-0 flex-shrink-0;
+    > svg {
+      fill: #494C6B;
+    }
 
+    > svg:hover {
+      fill: #c21e04;
+    }
+  }
+
+  .btnForUpdating {
+    @apply px-3 flex-grow-0 flex-shrink-0;
+    > svg {
+      color: #494C6B;
+    }
+
+    > svg:hover {
+      color: $Bright-Blue;
+    }
   }
 
 }
-.completed{
+
+.completed {
   @apply line-through;
   color: $Light-Light-Grayish-Blue;
 }
-.completed.dark{
+
+.completed.dark {
   color: $Dark-Very-Dark-Grayish;
 }
+
 .containerTodo.dark {
   border-color: $Dark-Very-Dark-Grayish;
+}
 
-  //Dark-Very-Dark-Grayish
+.none {
+  @apply hidden;
 }
