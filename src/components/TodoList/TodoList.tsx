@@ -7,17 +7,22 @@ import {selectFilter} from "../../store/slice/filtersSlice";
 import {useSelectTodo} from "../../hooks/useSelectTodo";
 import ExtraMenu from "../ExtraMenu/ExtraMenu";
 import {useTheme} from "../../hooks/useTheme";
+import {selectTodoAll} from "../../store/slice/todoSlice";
 
 
 const TodoList: FC = () => {
   const filter = useAppSelector(selectFilter)
   const todos = useSelectTodo(filter)
   const getContainerListClassName = useTheme('containerList', cl)
-  return (
+  const allTodos = useAppSelector(selectTodoAll)
 
+  const isSomeTaskUpdating = !!allTodos.find(t => t.isUpdating)
+
+
+  return (
     <div className={getContainerListClassName}>
       {todos.map((todo: ITodo) => (
-        <TodoItem key={todo.id} title={todo.title} completed={todo.completed} id={todo.id} isUpdating={todo.isUpdating}/>
+        <TodoItem key={todo.id} title={todo.title} completed={todo.completed} id={todo.id} isUpdating={todo.isUpdating} isSomeTaskUpdating={isSomeTaskUpdating}/>
       ))}
       <ExtraMenu/>
     </div>
