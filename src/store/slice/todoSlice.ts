@@ -12,7 +12,7 @@ const todoSlice = createSlice({
   reducers: {
     addTodo: {
       reducer: (state, action: PayloadAction<ITodo>): void => {
-        state.push(action.payload)
+        state.unshift(action.payload)
       },
       prepare: (title: string) => ({
         payload: {
@@ -34,11 +34,16 @@ const todoSlice = createSlice({
       return state.filter((todo) => !todo.completed)
     },
     isUpdatingTodo: (state, action: PayloadAction<string>): void => {
+      const updatingTodo = state.find(todo => todo.isUpdating)
+      if(updatingTodo && updatingTodo.id !== action.payload){
+        updatingTodo.isUpdating = !updatingTodo.isUpdating
+      }
       const todo = state.find((todo) => todo.id === action.payload)
       if (todo) todo.isUpdating = !todo.isUpdating
 
     },
     updatingTitleTodo: (state, action: PayloadAction<IUpdatingTodo>): void => {
+
       const todo = state.find((todo) => todo.id === action.payload.id)
       if (todo) {
         todo.title = action.payload.title

@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react'
+import {FC, useState} from 'react'
 import cl from './TodoItem.module.scss'
 import {deleteTodo, isUpdatingTodo, toggleTodo} from "../../store/slice/todoSlice";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
@@ -8,17 +8,12 @@ import {useScreenWidth} from "../../hooks/useScreenWidth";
 import {BsPencil} from 'react-icons/bs';
 import CrossSvg from "../../Assets/Image/CrossSVG";
 import UpdatingTitle from "../UpdatingForm/UpdatingTitle";
-import Alert from "../Alert/Alert";
-
-interface TodoItemProps extends ITodo {
-  isSomeTaskUpdating: boolean;
-}
 
 
-const TodoItem: FC<TodoItemProps> = ({title, id, completed, isUpdating, isSomeTaskUpdating, }) => {
+const TodoItem: FC<ITodo> = ({title, id, completed, isUpdating}) => {
   const dispatch = useAppDispatch()
   const userWidth = useScreenWidth()
-  const [isShowAlert, setIsShowAlert] = useState<boolean>(false)
+  const [taskValue, setTaskValue] = useState<string>(title)
 
   const getTitleClassName = [cl.title, userWidth > 400 ? cl.titleMore400px : cl.titleLess400px].join(' ')
   const getContainerTodoClassName = useTheme('containerTodo', cl)
@@ -31,27 +26,15 @@ const TodoItem: FC<TodoItemProps> = ({title, id, completed, isUpdating, isSomeTa
     dispatch(deleteTodo(id))
   }
 
-  const startUpdateHandler = (): void | boolean => {
-    if (!isSomeTaskUpdating) {
-      dispatch(isUpdatingTodo(id))
-    }
-    if (isSomeTaskUpdating) {
-      setIsShowAlert(true)
-      return false
-    }
-  }
+  const startUpdateHandler = (): void => {
+    setTaskValue(title)
+    dispatch(isUpdatingTodo(id))
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (isShowAlert) setIsShowAlert(false)
-    }, 2000)
-    return () => clearTimeout(timeout)
-  }, [isShowAlert])
+  }
 
 
   return (
     <>
-      {isShowAlert && <Alert>Please finish editing the task before trying to edit another task.</Alert>}
       <div className={`${getContainerTodoClassName} ${completed ? cl.completed : ''}`}>
 
         <input className={cl.checkbox}
@@ -66,7 +49,7 @@ const TodoItem: FC<TodoItemProps> = ({title, id, completed, isUpdating, isSomeTa
           {title}
         </div>
 
-        <UpdatingTitle isUpdating={isUpdating} id={id} title={title}/>
+        <UpdatingTitle isUpdating={isUpdating} id={id} title={title} taskValue={taskValue} setTaskValue={setTaskValue}/>
 
         <button onClick={startUpdateHandler} className={cl.btnForUpdating}>
           <BsPencil/>
