@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import cl from './TodoList.module.scss'
-import {ITodo} from '../../types/todoTypes';
+import {ITodo} from '../../types/ITodo';
 import TodoItem from "../TodoItem/TodoItem";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {selectFilter} from "../../store/slice/filtersSlice";
@@ -16,7 +16,7 @@ const TodoList: FC = () => {
   const getContainerListClassName = useTheme('containerList', cl)
   const allTodos = useAppSelector(selectTodoAll)
 
-  const isSomeTaskUpdating = !!allTodos.find(t => t.isUpdating)
+  let isSomeTaskUpdating = !!allTodos.find(t => t.isUpdating)
 
 
   return (

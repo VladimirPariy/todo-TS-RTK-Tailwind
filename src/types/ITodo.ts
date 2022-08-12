@@ -5,7 +5,3 @@ export interface ITodo {
   isUpdating: boolean;
 }
 
-export interface IUpdatingTodo {
-  id: string;
-  title: string;
-}

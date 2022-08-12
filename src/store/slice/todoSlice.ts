@@ -1,6 +1,7 @@
 import {createSlice, nanoid, PayloadAction} from "@reduxjs/toolkit";
-import {ITodo, IUpdatingTodo} from "../../types/todoTypes";
+import {ITodo} from "../../types/ITodo";
 import {RootState} from "../../hooks/useAppSelector";
+import { IUpdatingTodo } from "../../types/IUpdatingTodo";
 
 
 const initialState = [] as ITodo[]

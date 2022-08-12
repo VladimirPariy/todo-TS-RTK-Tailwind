@@ -1,0 +1,1 @@
+export interface IUpdatingTodo {  id: string;  title: string;}

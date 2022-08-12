@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import cl from "./ExtraMenu.module.scss";
 import {useSelectTodo} from "../../hooks/useSelectTodo";
-import {ITodo} from "../../types/todoTypes";
+import {ITodo} from "../../types/ITodo";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import { removeCompletedItem } from '../../store/slice/todoSlice';
 
