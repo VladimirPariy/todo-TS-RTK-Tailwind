@@ -51,12 +51,26 @@ const todoSlice = createSlice({
         todo.title = action.payload.title
         todo.isUpdating = !todo.isUpdating
       }
-    }
+    },
+    dragAndDropTodo:(state, action)=> {
+
+      if (action.payload.currentCard !== null) {
+        const current = action.payload.todos.find((todo:ITodo) => todo.id === action.payload.currentCard.id) || {} as ITodo
+        const startArr = action.payload.todos.slice(0, action.payload.todo.order + 1).filter((todo:ITodo) => todo.id !== action.payload.currentCard.id)
+        const endArr = action.payload.todos.slice(action.payload.todo.order + 1).filter((todo:ITodo) => todo.id !== action.payload.currentCard.id)
+
+        const concatArr = startArr?.concat(current, endArr)
+        return concatArr?.map((item:ITodo, index:number) => {
+          return {...item, order: index}
+        })
+      }
+      return state
+    },
 
   }
 })
 
-export const {addTodo, toggleTodo, deleteTodo, removeCompletedItem, isUpdatingTodo, updatingTitleTodo} = todoSlice.actions
+export const {addTodo, toggleTodo, deleteTodo, removeCompletedItem, isUpdatingTodo, updatingTitleTodo, dragAndDropTodo} = todoSlice.actions
 export const todoReducer = todoSlice.reducer
 
 

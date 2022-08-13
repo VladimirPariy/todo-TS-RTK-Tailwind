@@ -1,4 +1,4 @@
-import {FC, useState} from 'react'
+import {DragEvent, FC, useState} from 'react'
 import cl from './TodoItem.module.scss'
 import {deleteTodo, isUpdatingTodo, toggleTodo} from "../../store/slice/todoSlice";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
@@ -10,7 +10,23 @@ import CrossSvg from "../../Assets/Image/CrossSVG";
 import UpdatingTitle from "../UpdatingForm/UpdatingTitle";
 
 
-const TodoItem: FC<ITodo> = ({title, id, completed, isUpdating}) => {
+interface TodoItemProps {
+  todo: ITodo;
+  dragStartHandler: (e: DragEvent<HTMLDivElement>, card: ITodo) => void
+  dragLeaveHandler: (e: DragEvent<HTMLDivElement>) => void
+  dragEndHandler: (e: DragEvent<HTMLDivElement>) => void
+  dragOverHandler: (e: DragEvent<HTMLDivElement>) => void
+  dropHandler: (e: DragEvent<HTMLDivElement>, card: ITodo) => void
+}
+
+
+const TodoItem: FC<TodoItemProps> = ({
+                                       dragStartHandler,
+                                       dragLeaveHandler,
+                                       dragEndHandler,
+                                       dragOverHandler,
+                                       dropHandler, todo, todo: {title, id, completed, isUpdating}
+                                     }) => {
   const dispatch = useAppDispatch()
   const userWidth = useScreenWidth()
   const [taskValue, setTaskValue] = useState<string>(title)
@@ -33,7 +49,13 @@ const TodoItem: FC<ITodo> = ({title, id, completed, isUpdating}) => {
 
 
   return (
-    <div className={`${getContainerTodoClassName} ${completed ? cl.completed : ''}`}>
+    <div className={`${getContainerTodoClassName} ${completed ? cl.completed : ''}`}
+         draggable={true}
+         onDragStart={(e) => dragStartHandler(e, todo)}
+         onDragOver={(e) => dragOverHandler(e)}
+         onDragLeave={(e) => dragLeaveHandler(e)}
+         onDragEnd={(e) => dragEndHandler(e)}
+         onDrop={(e) => dropHandler(e, todo)}>
 
       <input className={cl.checkbox}
              type="checkbox"

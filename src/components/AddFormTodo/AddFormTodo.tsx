@@ -14,7 +14,7 @@ const AddFormTodo: FC = () => {
   const dispatch = useAppDispatch()
   const isValid = useAppSelector(isValidTodoSelector)
   const setFormClassName = useTheme('form', cl)
-const allTodo = useAppSelector(selectTodoAll)
+  const allTodo = useAppSelector(selectTodoAll)
   const refInput = useRef<HTMLInputElement>(null)
   const [todoValue, setTodoValue] = useState<string>('')
 

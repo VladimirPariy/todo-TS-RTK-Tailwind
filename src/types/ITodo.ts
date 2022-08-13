@@ -3,5 +3,6 @@ export interface ITodo {
   id: string;
   completed: boolean;
   isUpdating: boolean;
+  order:number
 }
 
