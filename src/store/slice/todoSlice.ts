@@ -1,7 +1,7 @@
 import {createSlice, nanoid, PayloadAction} from "@reduxjs/toolkit";
 import {ITodo} from "../../types/ITodo";
 import {RootState} from "../../hooks/useAppSelector";
-import { IUpdatingTodo } from "../../types/IUpdatingTodo";
+import {IUpdatingTodo} from "../../types/IUpdatingTodo";
 
 
 const initialState = [] as ITodo[]
@@ -14,12 +14,14 @@ const todoSlice = createSlice({
       reducer: (state, action: PayloadAction<ITodo>): void => {
         state.unshift(action.payload)
       },
-      prepare: (title: string) => ({
+      prepare: (title: string, state) => ({
         payload: {
           title,
           id: nanoid(),
           completed: false,
-          isUpdating: false
+          isUpdating: false,
+          order: state.length > 0 ? state.length : 0
+
         }
       })
     },
@@ -35,7 +37,7 @@ const todoSlice = createSlice({
     },
     isUpdatingTodo: (state, action: PayloadAction<string>): void => {
       const updatingTodo = state.find(todo => todo.isUpdating)
-      if(updatingTodo && updatingTodo.id !== action.payload){
+      if (updatingTodo && updatingTodo.id !== action.payload) {
         updatingTodo.isUpdating = !updatingTodo.isUpdating
       }
       const todo = state.find((todo) => todo.id === action.payload)

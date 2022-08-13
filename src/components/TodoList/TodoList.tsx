@@ -19,7 +19,7 @@ const TodoList: FC = () => {
   return (
     <div className={getContainerListClassName}>
       {todos.map((todo: ITodo) => (
-        <TodoItem key={todo.id} title={todo.title} completed={todo.completed} id={todo.id} isUpdating={todo.isUpdating}/>
+        <TodoItem key={todo.id} {...todo}/>
       ))}
       <ExtraMenu/>
     </div>

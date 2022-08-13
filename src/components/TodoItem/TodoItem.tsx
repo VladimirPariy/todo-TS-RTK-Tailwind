@@ -29,36 +29,33 @@ const TodoItem: FC<ITodo> = ({title, id, completed, isUpdating}) => {
   const startUpdateHandler = (): void => {
     setTaskValue(title)
     dispatch(isUpdatingTodo(id))
-
   }
 
 
   return (
-    <>
-      <div className={`${getContainerTodoClassName} ${completed ? cl.completed : ''}`}>
+    <div className={`${getContainerTodoClassName} ${completed ? cl.completed : ''}`}>
 
-        <input className={cl.checkbox}
-               type="checkbox"
-               id={id}
-               checked={completed}
-               onChange={toggleCheckboxHandler}/>
-        <label htmlFor={id}
-               className={[cl['checkboxLabel'], cl[completed ? "checkboxActive" : ""]].join(' ')}
-        />
-        <div className={isUpdating ? cl.none : getTitleClassName}>
-          {title}
-        </div>
-
-        <UpdatingTitle isUpdating={isUpdating} id={id} title={title} taskValue={taskValue} setTaskValue={setTaskValue}/>
-
-        <button onClick={startUpdateHandler} className={cl.btnForUpdating}>
-          <BsPencil/>
-        </button>
-        <button className={cl.btnForDel} onClick={removeHandler}>
-          <CrossSvg/>
-        </button>
+      <input className={cl.checkbox}
+             type="checkbox"
+             id={id}
+             checked={completed}
+             onChange={toggleCheckboxHandler}/>
+      <label htmlFor={id}
+             className={[cl['checkboxLabel'], cl[completed ? "checkboxActive" : ""]].join(' ')}
+      />
+      <div className={isUpdating ? cl.none : getTitleClassName}>
+        {title}
       </div>
-    </>
+
+      <UpdatingTitle isUpdating={isUpdating} id={id} title={title} taskValue={taskValue} setTaskValue={setTaskValue}/>
+
+      <button onClick={startUpdateHandler} className={cl.btnForUpdating}>
+        <BsPencil/>
+      </button>
+      <button className={cl.btnForDel} onClick={removeHandler}>
+        <CrossSvg/>
+      </button>
+    </div>
   );
 };
 

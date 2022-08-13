@@ -1,7 +1,7 @@
 import {ChangeEvent, FC, FormEvent, useEffect, useRef, useState} from "react";
 import cl from './AddFormTodo.module.scss'
 import {AiOutlinePlus} from 'react-icons/ai';
-import {addTodo} from "../../store/slice/todoSlice";
+import {addTodo, selectTodoAll} from "../../store/slice/todoSlice";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {useTheme} from "../../hooks/useTheme";
 import {isValidTodo, isValidTodoSelector} from "../../store/slice/validTodoSlice";
@@ -14,14 +14,14 @@ const AddFormTodo: FC = () => {
   const dispatch = useAppDispatch()
   const isValid = useAppSelector(isValidTodoSelector)
   const setFormClassName = useTheme('form', cl)
-
+const allTodo = useAppSelector(selectTodoAll)
   const refInput = useRef<HTMLInputElement>(null)
   const [todoValue, setTodoValue] = useState<string>('')
 
   const submitHandle = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (todoValue.trim().length > 0) {
-      dispatch(addTodo(todoValue))
+      dispatch(addTodo(todoValue, allTodo))
       setTodoValue('')
       refInput.current?.focus()
       return
