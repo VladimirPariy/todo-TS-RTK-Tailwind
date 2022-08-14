@@ -5,16 +5,14 @@
   font-size: 14px;
   .activeItem {
     color: $Light-Dark-Grayish-Blue;
-    font-weight: bold;
-    cursor: default;
+    @apply cursor-default font-bold;
   }
 
   .clearCompleted {
     color: $Light-Dark-Grayish-Blue;
-    font-weight: bold;
+    @apply font-bold;
   }
   .clearCompleted:hover {
     color: $Dark-Light-Grayish-Blue;
-    font-weight: bold;
   }
 }

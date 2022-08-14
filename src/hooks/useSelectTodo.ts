@@ -1,6 +1,6 @@
 import {selectTodoActive, selectTodoAll, selectTodoCompleted} from "../store/slice/todoSlice";
 import {useAppSelector} from "./useAppSelector";
-import {ITodo} from "../types/ITodo";
+import {ITodo} from "../models/ITodo";
 
 export const useSelectTodo = (filter: string): ITodo[] | [] => {
     let selector

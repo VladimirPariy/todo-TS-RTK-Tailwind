@@ -1,21 +1,22 @@
 @import '../../index';
 
 .form {
-    @apply flex gap-2 my-2 relative rounded;
-    .input {
-        @apply bg-transparent rounded w-full h-12 px-4 my-0.5 focus:outline-none focus:outline-offset-0 ;
-    }
-    .button{
-        @apply mr-2.5 rounded flex items-center justify-center;
-    }
+  @apply flex gap-2 my-2 relative rounded;
+  .input {
+    @apply bg-transparent rounded w-full h-12 px-4 my-0.5 focus:outline-none focus:outline-offset-0 ;
+  }
+
+  .button {
+    @apply mr-2.5 rounded flex items-center justify-center;
+  }
 }
 
-.dark{
-    background: $Dark-Very-Dark-Desaturated-Blue;
-    color: $Dark-Light-Grayish-Blue;
+.dark {
+  background: $Dark-Very-Dark-Desaturated-Blue;
+  color: $Dark-Light-Grayish-Blue;
 }
 
 .light {
-    background: $Light-Very-Light-Gray;
-    color: $Light-Very-Dark-Grayish-Blue;
+  background: $Light-Very-Light-Gray;
+  color: $Light-Very-Dark-Grayish-Blue;
 }

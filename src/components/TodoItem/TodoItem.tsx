@@ -2,7 +2,7 @@ import {DragEvent, FC, useState} from 'react'
 import cl from './TodoItem.module.scss'
 import {deleteTodo, isUpdatingTodo, toggleTodo} from "../../store/slice/todoSlice";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {ITodo} from "../../types/ITodo";
+import {ITodo} from "../../models/ITodo";
 import {useTheme} from "../../hooks/useTheme";
 import {useScreenWidth} from "../../hooks/useScreenWidth";
 import {BsPencil} from 'react-icons/bs';
@@ -20,19 +20,20 @@ interface TodoItemProps {
 }
 
 
-const TodoItem: FC<TodoItemProps> = ({
-                                       dragStartHandler,
-                                       dragLeaveHandler,
-                                       dragEndHandler,
-                                       dragOverHandler,
-                                       dropHandler, todo, todo: {title, id, completed, isUpdating}
-                                     }) => {
+const TodoItem: FC<TodoItemProps> = (props) => {
+
+  const {
+    dragStartHandler,
+    dragEndHandler,
+    dragOverHandler,
+    dropHandler,
+    todo,
+    todo: {title, id, completed, isUpdating}
+  } = props
+
   const dispatch = useAppDispatch()
   const userWidth = useScreenWidth()
   const [taskValue, setTaskValue] = useState<string>(title)
-
-  const getTitleClassName = [cl.title, userWidth > 400 ? cl.titleMore400px : cl.titleLess400px].join(' ')
-  const getContainerTodoClassName = useTheme('containerTodo', cl)
 
   const toggleCheckboxHandler = () => {
     dispatch(toggleTodo(id))
@@ -48,12 +49,16 @@ const TodoItem: FC<TodoItemProps> = ({
   }
 
 
+  const getTitleClassName = isUpdating ? cl.none : [cl.title, userWidth > 400 ? cl.titleMore400px : cl.titleLess400px].join(' ')
+  const getContainerTodoClassName = `${useTheme('containerTodo', cl)} ${completed ? cl.completed : ''}`
+  const getLabelClassName = [cl['checkboxLabel'], cl[completed ? "checkboxActive" : ""]].join(' ')
+
   return (
-    <div className={`${getContainerTodoClassName} ${completed ? cl.completed : ''}`}
+    <div className={getContainerTodoClassName}
          draggable={true}
          onDragStart={(e) => dragStartHandler(e, todo)}
          onDragOver={(e) => dragOverHandler(e)}
-         onDragLeave={(e) => dragLeaveHandler(e)}
+         onDragLeave={(e) => dragEndHandler(e)}
          onDragEnd={(e) => dragEndHandler(e)}
          onDrop={(e) => dropHandler(e, todo)}>
 
@@ -63,20 +68,19 @@ const TodoItem: FC<TodoItemProps> = ({
              checked={completed}
              onChange={toggleCheckboxHandler}/>
       <label htmlFor={id}
-             className={[cl['checkboxLabel'], cl[completed ? "checkboxActive" : ""]].join(' ')}
-      />
-      <div className={isUpdating ? cl.none : getTitleClassName}>
-        {title}
-      </div>
-
-      <UpdatingTitle isUpdating={isUpdating} id={id} title={title} taskValue={taskValue} setTaskValue={setTaskValue}/>
-
-      <button onClick={startUpdateHandler} className={cl.btnForUpdating}>
-        <BsPencil/>
-      </button>
-      <button className={cl.btnForDel} onClick={removeHandler}>
-        <CrossSvg/>
-      </button>
+             className={getLabelClassName}/>
+      <div className={getTitleClassName}>{title}</div>
+      <UpdatingTitle isUpdating={isUpdating}
+                     id={id}
+                     title={title}
+                     taskValue={taskValue}
+                     setTaskValue={setTaskValue}/>
+      <button onClick={startUpdateHandler}
+              className={cl.btnForUpdating}
+              children={<BsPencil/>}/>
+      <button onClick={removeHandler}
+              className={cl.btnForDel}
+              children={<CrossSvg/>}/>
     </div>
   );
 };

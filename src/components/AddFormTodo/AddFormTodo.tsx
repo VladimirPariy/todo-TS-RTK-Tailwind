@@ -1,4 +1,4 @@
-import {ChangeEvent, FC, FormEvent, useEffect, useRef, useState} from "react";
+import React, {FC, useEffect, useRef, useState} from "react";
 import cl from './AddFormTodo.module.scss'
 import {AiOutlinePlus} from 'react-icons/ai';
 import {addTodo, selectTodoAll} from "../../store/slice/todoSlice";
@@ -13,12 +13,12 @@ const AddFormTodo: FC = () => {
 
   const dispatch = useAppDispatch()
   const isValid = useAppSelector(isValidTodoSelector)
-  const setFormClassName = useTheme('form', cl)
   const allTodo = useAppSelector(selectTodoAll)
+  const setFormClassName = useTheme('form', cl)
   const refInput = useRef<HTMLInputElement>(null)
   const [todoValue, setTodoValue] = useState<string>('')
 
-  const submitHandle = (e: FormEvent<HTMLFormElement>) => {
+  const submitHandle = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (todoValue.trim().length > 0) {
       dispatch(addTodo(todoValue, allTodo))
@@ -31,8 +31,12 @@ const AddFormTodo: FC = () => {
     refInput.current?.focus()
   }
 
-  const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoValue(e.target.value)
+  }
+
+  const inputBlurHandler = () => {
+    if (!isValid) dispatch(isValidTodo(true))
   }
 
   useEffect(() => {
@@ -55,13 +59,10 @@ const AddFormTodo: FC = () => {
                onChange={inputChangeHandler}
                placeholder='Create a new todo...'
                ref={refInput}
-               onBlur={() => {
-                 if (!isValid) dispatch(isValidTodo(true))
-               }}
-        />
-        <button className={cl.button} type='submit'>
-          <AiOutlinePlus/>
-        </button>
+               onBlur={inputBlurHandler}/>
+        <button className={cl.button}
+                type='submit'
+                children={<AiOutlinePlus/>}/>
       </form>
     </>
   )
