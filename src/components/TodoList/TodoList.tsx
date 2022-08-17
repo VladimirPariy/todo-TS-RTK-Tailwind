@@ -27,7 +27,7 @@ const TodoList: FC = () => {
   return (
 
     <div className={getContainerListClassName}>
-      <Reorder.Group as='div' axis="y" onReorder={updatingTodoState} values={todos} animate={{scale:1}}>
+      <Reorder.Group as='div' axis="y" onReorder={updatingTodoState} values={todos}>
         {todos.map((todo: ITodo) => (
           <TodoItem key={todo.id}
                     todo={todo}/>

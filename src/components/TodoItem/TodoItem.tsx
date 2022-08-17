@@ -1,4 +1,4 @@
-import {FC, useState} from 'react'
+import React, {FC, useRef, useState} from 'react'
 import cl from './TodoItem.module.scss'
 import {deleteTodo, isUpdatingTodo, toggleTodo} from "../../store/slice/todoSlice";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
@@ -8,7 +8,7 @@ import {useScreenWidth} from "../../hooks/useScreenWidth";
 import {BsPencil} from 'react-icons/bs';
 import CrossSvg from "../../Assets/Image/CrossSVG";
 import UpdatingTitle from "../UpdatingForm/UpdatingTitle";
-import {Reorder} from 'framer-motion';
+import {Reorder, useDragControls, useMotionValue, useTransform} from 'framer-motion';
 
 
 interface TodoItemProps {
@@ -44,8 +44,18 @@ const TodoItem: FC<TodoItemProps> = (props) => {
   const getContainerTodoClassName = `${useTheme('containerTodo', cl)} ${completed ? cl.completed : ''}`
   const getLabelClassName = [cl['checkboxLabel'], cl[completed ? "checkboxActive" : ""]].join(' ')
 
+
+
   return (
-    <Reorder.Item as='div' value={todo} id={id}>
+    <Reorder.Item
+      transformTemplate={
+        ({ x, rotate }) => `rotate(${rotate}deg) translateX(${x}px)`
+      }
+      style={{ rotate: 0, x: "calc(50vh - 100px)" }}
+
+
+      as='div' value={todo} id={id}
+    >
       <div className={getContainerTodoClassName}>
         <input className={cl.checkbox}
                type="checkbox"
