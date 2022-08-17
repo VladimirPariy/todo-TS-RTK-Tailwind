@@ -1,4 +1,4 @@
-import React, {FC, useRef, useState} from 'react'
+import React, {FC, useState} from 'react'
 import cl from './TodoItem.module.scss'
 import {deleteTodo, isUpdatingTodo, toggleTodo} from "../../store/slice/todoSlice";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
@@ -8,7 +8,7 @@ import {useScreenWidth} from "../../hooks/useScreenWidth";
 import {BsPencil} from 'react-icons/bs';
 import CrossSvg from "../../Assets/Image/CrossSVG";
 import UpdatingTitle from "../UpdatingForm/UpdatingTitle";
-import {Reorder, useDragControls, useMotionValue, useTransform} from 'framer-motion';
+import {Reorder} from 'framer-motion';
 
 
 interface TodoItemProps {
