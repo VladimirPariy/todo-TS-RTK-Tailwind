@@ -3,11 +3,7 @@ import {ITodo} from "../../models/ITodo";
 import {RootState} from "../../hooks/useAppSelector";
 import {IUpdatingTodo} from "../../models/IUpdatingTodo";
 
-interface IDragAndDropPayload {
-  draggingTodo: ITodo,
-  todos: ITodo[],
-  droppingTodo: ITodo
-}
+
 
 const todoSlice = createSlice({
   name: '@@todo',
@@ -51,7 +47,7 @@ const todoSlice = createSlice({
       if (todo) todo.isUpdating = !todo.isUpdating
     },
 
-    updatingTitleTodo: (state, action: PayloadAction<IUpdatingTodo>): void => {
+    updatedTitleTodo: (state, action: PayloadAction<IUpdatingTodo>): void => {
       const todo = state.find((todo) => todo.id === action.payload.id)
       if (todo) {
         todo.title = action.payload.title
@@ -59,26 +55,9 @@ const todoSlice = createSlice({
       }
     },
 
-    dragAndDropTodo: (state, {payload: {draggingTodo, droppingTodo, todos}}: PayloadAction<IDragAndDropPayload>) => {
-      if (draggingTodo !== null) {
-        const funcForFilter = (todo: ITodo) => todo.id !== draggingTodo.id
-        const current = todos.find((todo: ITodo) => todo.id === draggingTodo.id) || {} as ITodo
-        const todoArrayBeforeDraggingTodo = todos
-          .slice(0, droppingTodo.order + 1)
-          .filter(funcForFilter)
-        const todoArrayAfterDraggingTodo = todos
-          .slice(droppingTodo.order + 1)
-          .filter(funcForFilter)
-
-        const newTodosArray = todoArrayBeforeDraggingTodo?.concat(current, todoArrayAfterDraggingTodo)
-
-        return newTodosArray?.map((item: ITodo, index: number) => {
-          return {...item, order: index}
-        })
-      }
-      return state
-    },
-
+    updatingState: (_, {payload}) => {
+      return payload
+    }
   }
 })
 
@@ -88,8 +67,8 @@ export const {
   deleteTodo,
   removeCompletedItem,
   isUpdatingTodo,
-  updatingTitleTodo,
-  dragAndDropTodo
+  updatedTitleTodo,
+  updatingState
 } = todoSlice.actions
 export const todoReducer = todoSlice.reducer
 
