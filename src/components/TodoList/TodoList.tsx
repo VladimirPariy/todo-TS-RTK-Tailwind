@@ -9,7 +9,7 @@ import ExtraMenu from "../ExtraMenu/ExtraMenu";
 import {useTheme} from "../../hooks/useTheme";
 import {updatingState} from "../../store/slice/todoSlice";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {Reorder} from 'framer-motion';
+import {AnimatePresence, Reorder} from 'framer-motion';
 
 
 const TodoList: FC = () => {
@@ -28,10 +28,12 @@ const TodoList: FC = () => {
 
     <div className={getContainerListClassName}>
       <Reorder.Group as='div' axis="y" onReorder={updatingTodoState} values={todos}>
-        {todos.map((todo: ITodo) => (
-          <TodoItem key={todo.id}
-                    todo={todo}/>
-        ))}
+        <AnimatePresence>
+          {todos.map((todo: ITodo) => (
+            <TodoItem key={todo.id}
+                      todo={todo}/>
+          ))}
+        </AnimatePresence>
       </Reorder.Group>
       <ExtraMenu/>
     </div>

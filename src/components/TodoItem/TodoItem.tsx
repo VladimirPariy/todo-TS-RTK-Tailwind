@@ -45,7 +45,10 @@ const TodoItem: FC<TodoItemProps> = (props) => {
   const getLabelClassName = [cl['checkboxLabel'], cl[completed ? "checkboxActive" : ""]].join(' ')
 
   return (
-    <Reorder.Item as='div' value={todo} id={id}>
+    <Reorder.Item as='div' value={todo} id={id}
+                  initial={{opacity: 0, height: 0}}
+                  animate={{opacity: 1, height: 'auto',}}
+                  exit={{opacity: 0, height: 0,}}>
       <div className={getContainerTodoClassName}>
         <input className={cl.checkbox}
                type="checkbox"
