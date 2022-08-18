@@ -1,4 +1,4 @@
-import React, {FC, useState, MouseEvent} from 'react'
+import React, {FC, MouseEvent, useState} from 'react'
 import cl from './TodoItem.module.scss'
 import {deleteTodo, isUpdatingTodo, toggleTodo} from "../../store/slice/todoSlice";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
@@ -9,7 +9,6 @@ import {BsPencil} from 'react-icons/bs';
 import CrossSvg from "../../Assets/Image/CrossSVG";
 import UpdatingTitle from "../UpdatingForm/UpdatingTitle";
 import {Reorder} from 'framer-motion';
-import {log} from "util";
 
 
 interface TodoItemProps {
@@ -27,21 +26,17 @@ const TodoItem: FC<TodoItemProps> = (props) => {
   const userWidth = useScreenWidth()
   const [taskValue, setTaskValue] = useState<string>(title)
 
-  // const [dragEff, setDragEff] = useState(false)
-
   const toggleCheckboxHandler = () => {
     dispatch(toggleTodo(id))
   }
 
   const removeHandler = () => {
     dispatch(deleteTodo(id))
-    // setDragEff(true)
   }
 
   const startUpdateHandler = (e: MouseEvent<HTMLButtonElement>): void => {
     setTaskValue(title)
     dispatch(isUpdatingTodo(id))
-    // setDragEff(true)
   }
 
 
@@ -50,10 +45,7 @@ const TodoItem: FC<TodoItemProps> = (props) => {
   const getLabelClassName = [cl['checkboxLabel'], cl[completed ? "checkboxActive" : ""]].join(' ')
 
   return (
-    <Reorder.Item
-
-      as='div' value={todo} id={id}
-    >
+    <Reorder.Item as='div' value={todo} id={id}>
       <div className={getContainerTodoClassName}>
         <input className={cl.checkbox}
                type="checkbox"
