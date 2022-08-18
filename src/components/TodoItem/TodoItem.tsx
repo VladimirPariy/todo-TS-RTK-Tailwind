@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react'
+import React, {FC, useState, MouseEvent} from 'react'
 import cl from './TodoItem.module.scss'
 import {deleteTodo, isUpdatingTodo, toggleTodo} from "../../store/slice/todoSlice";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
@@ -9,6 +9,7 @@ import {BsPencil} from 'react-icons/bs';
 import CrossSvg from "../../Assets/Image/CrossSVG";
 import UpdatingTitle from "../UpdatingForm/UpdatingTitle";
 import {Reorder} from 'framer-motion';
+import {log} from "util";
 
 
 interface TodoItemProps {
@@ -26,17 +27,21 @@ const TodoItem: FC<TodoItemProps> = (props) => {
   const userWidth = useScreenWidth()
   const [taskValue, setTaskValue] = useState<string>(title)
 
+  // const [dragEff, setDragEff] = useState(false)
+
   const toggleCheckboxHandler = () => {
     dispatch(toggleTodo(id))
   }
 
   const removeHandler = () => {
     dispatch(deleteTodo(id))
+    // setDragEff(true)
   }
 
-  const startUpdateHandler = (): void => {
+  const startUpdateHandler = (e: MouseEvent<HTMLButtonElement>): void => {
     setTaskValue(title)
     dispatch(isUpdatingTodo(id))
+    // setDragEff(true)
   }
 
 
@@ -44,15 +49,8 @@ const TodoItem: FC<TodoItemProps> = (props) => {
   const getContainerTodoClassName = `${useTheme('containerTodo', cl)} ${completed ? cl.completed : ''}`
   const getLabelClassName = [cl['checkboxLabel'], cl[completed ? "checkboxActive" : ""]].join(' ')
 
-
-
   return (
     <Reorder.Item
-      transformTemplate={
-        ({ x, rotate }) => `rotate(${rotate}deg) translateX(${x}px)`
-      }
-      style={{ rotate: 0, x: "calc(50vh - 100px)" }}
-
 
       as='div' value={todo} id={id}
     >
@@ -69,7 +67,7 @@ const TodoItem: FC<TodoItemProps> = (props) => {
                        title={title}
                        taskValue={taskValue}
                        setTaskValue={setTaskValue}/>
-        <button onClick={startUpdateHandler}
+        <button onClick={e => startUpdateHandler(e)}
                 className={cl.btnForUpdating}
                 children={<BsPencil/>}/>
         <button onClick={removeHandler}
