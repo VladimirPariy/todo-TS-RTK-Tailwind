@@ -1,4 +1,4 @@
-The project published on that link - https://app.netlify.com/sites/todo-appvp/overview
+The project published on that link - https://todo-appvp.netlify.app/
 
 Objective taken from the - https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW
 
